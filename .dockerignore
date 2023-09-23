@@ -1,0 +1,9 @@
+data
+coverage
+.git
+.env.exmple
+Dockerfile
+.dockerignore
+node_modules
+npm-debug.log
+dist

@@ -28,7 +28,7 @@ export class PokemonService {
 
   async importPokemons(forceImport: boolean = false): Promise<string> {
     const appDir = dirname(require.main.filename);
-    const pokemonsFilePath = `${appDir}/../pokemons.json`;
+    const pokemonsFilePath = `${appDir}/pokemons.json`;
     const importedFlagFilePath = `${appDir}/.imported`;
 
     if (!forceImport) {
@@ -39,7 +39,7 @@ export class PokemonService {
     }
 
     if (!existsSync(pokemonsFilePath)) {
-      return 'Please make sure the pokemons.json file is in the app root folder!';
+      return 'Please make sure the pokemons.json file is in the app root folder!' + pokemonsFilePath;
     }
 
     /*

@@ -1,0 +1,28 @@
+version: '3.7'
+services:
+  app:
+    build: .
+    networks: 
+      - my-network
+    depends_on:
+      - mongodb
+    ports:
+      - 3000:3000
+    env_file:
+      - .env
+  mongodb:
+    image: mongodb/mongodb-community-server:6.0-ubi8
+    environment:
+      - MONGODB_INITDB_ROOT_USERNAME=${DATABASE_USER}
+      - MONGODB_INITDB_ROOT_PASSWORD=${DATABASE_PASSWORD}
+    ports: 
+      - 27017:27017
+    networks: 
+      - my-network
+    volumes:
+      - ./data:/data/db
+      - ./pokemons.json:/tmp/COLLECTION.json
+    command: mongoimport --drop --collection=COLLECTION "${MONGODB_URI}" /tmp/COLLECTION.json
+
+networks:
+  my-network:
